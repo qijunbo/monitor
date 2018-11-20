@@ -16,6 +16,7 @@ import net.monitor.utils.Config;
 import net.monitor.utils.HostUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import net.monitor.domain.OS.*;   
 
 /**
  * Created with IntelliJ IDEA. User: zyj Date: 13-5-15 Time: 下午2:49 To change
@@ -44,7 +45,7 @@ public class MonitorMain {
   }
 
   public void start() throws Exception {
-    switch (Config.os) {
+    switch (Config.OS) {
       case LINUX:
         String localHostIp = HostUtil.getLinuxHostIP();
         LOGGER.info("ip: {}", localHostIp);
@@ -60,7 +61,7 @@ public class MonitorMain {
         THREAD_POOL.execute(new TrafficForWindows(localHostIp));
         break;
       default:
-        throw new IllegalArgumentException("暂不支持该操作系统！os = " + Config.os);
+        throw new IllegalArgumentException("暂不支持该操作系统！os = " + Config.OS);
     }
   }
 }
